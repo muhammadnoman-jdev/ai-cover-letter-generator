@@ -8,7 +8,6 @@ public class AiCoverLetterGeneratorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AiCoverLetterGeneratorApplication.class, args);
-		system.out.println("AI Cover Letter Generator Application is running...");
 	}
 
 }
