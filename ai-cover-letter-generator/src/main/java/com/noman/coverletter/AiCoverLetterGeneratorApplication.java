@@ -8,6 +8,7 @@ public class AiCoverLetterGeneratorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AiCoverLetterGeneratorApplication.class, args);
+		sysout.println("Application started successfully.");
 	}
 
 }
