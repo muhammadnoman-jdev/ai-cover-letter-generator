@@ -24,10 +24,11 @@
             </div>
             <div>
                 <a th:href="@{/cover-letters/{id}(id=${letter.id})}" class="btn btn-outline-primary btn-sm">View</a>
-                <form th:action="@{/cover-letters/delete/{id}(id=${letter.id})}" method="post" style="display:inline">
-                    <button type="submit" class="btn btn-outline-danger btn-sm"
-                            onclick="return confirm('Delete this cover letter?')">Delete</button>
-                </form>
+				<a th:href="@{/cover-letters/edit/{id}(id=${letter.id})}" class="btn btn-outline-warning btn-sm">Edit</a>
+				<form th:action="@{/cover-letters/delete/{id}(id=${letter.id})}" method="post" style="display:inline">
+				    <button type="submit" class="btn btn-outline-danger btn-sm"
+				            onclick="return confirm('Delete this cover letter?')">Delete</button>
+				</form>
             </div>
         </div>
     </div>

@@ -30,15 +30,19 @@ public class AIService {
     }
 
     private String buildPrompt(CoverLetterRequestDTO dto) {
-        return "Write a professional cover letter with the following details:\n\n" +
+        return "Write a professional cover letter for a software engineering job with the following details:\n\n" +
                "Job Title: " + dto.getJobTitle() + "\n" +
                "Company Name: " + dto.getCompanyName() + "\n" +
                "Applicant Skills: " + dto.getSkills() + "\n" +
                "Applicant Experience: " + dto.getExperience() + "\n" +
                "Job Description: " + dto.getJobDescription() + "\n" +
                "Tone: " + dto.getTone() + "\n\n" +
-               "Write only the cover letter text. No explanations. No subject line. " +
-               "Start directly with 'Dear Hiring Manager,' and end with a proper sign-off.";
+               "IMPORTANT RULES:\n" +
+               "1. Start directly with 'Dear Hiring Manager,'\n" +
+               "2. Write only the letter body — no subject line, no date, no address header\n" +
+               "3. End with 'Sincerely,' followed by a blank line — do NOT add any name, phone, email or placeholder text after Sincerely\n" +
+               "4. Do not add any bracketed placeholders like [Your Name] or [Your Email]\n" +
+               "5. Keep it to 3-4 paragraphs, professional and concise";
     }
 
     private String callOpenRouter(String prompt) {
@@ -63,8 +67,29 @@ public class AIService {
 
         try {
             ResponseEntity<Map> response = restTemplate.postForEntity(apiUrl, request, Map.class);
+            
+            // DEBUG - print full response to console
+            System.out.println("=== OPENROUTER RESPONSE ===");
+            System.out.println(response.getBody());
+            System.out.println("===========================");
 
-            List<Map> choices = (List<Map>) response.getBody().get("choices");
+            Map<String, Object> body = response.getBody();
+            
+            if (body == null) {
+                return "Error: Empty response from AI service";
+            }
+
+            // Check for error field in response
+            if (body.containsKey("error")) {
+                return "AI Error: " + body.get("error").toString();
+            }
+
+            List<Map> choices = (List<Map>) body.get("choices");
+            
+            if (choices == null || choices.isEmpty()) {
+                return "Error: No choices in response. Full response: " + body.toString();
+            }
+            
             Map firstChoice = choices.get(0);
             Map messageResponse = (Map) firstChoice.get("message");
             return (String) messageResponse.get("content");

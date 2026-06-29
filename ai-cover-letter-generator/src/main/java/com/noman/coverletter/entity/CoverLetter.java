@@ -31,8 +31,45 @@ public class CoverLetter {
 
     @Column(nullable = false)
     private String tone;
+    
+    private String applicantName;
+    private String applicantEmail;
+    private String applicantPhone;
+    private String applicantLinkedin;
 
-    @Column(columnDefinition = "TEXT")
+    public String getApplicantName() {
+		return applicantName;
+	}
+
+	public void setApplicantName(String applicantName) {
+		this.applicantName = applicantName;
+	}
+
+	public String getApplicantEmail() {
+		return applicantEmail;
+	}
+
+	public void setApplicantEmail(String applicantEmail) {
+		this.applicantEmail = applicantEmail;
+	}
+
+	public String getApplicantPhone() {
+		return applicantPhone;
+	}
+
+	public void setApplicantPhone(String applicantPhone) {
+		this.applicantPhone = applicantPhone;
+	}
+
+	public String getApplicantLinkedin() {
+		return applicantLinkedin;
+	}
+
+	public void setApplicantLinkedin(String applicantLinkedin) {
+		this.applicantLinkedin = applicantLinkedin;
+	}
+
+	@Column(columnDefinition = "TEXT")
     private String generatedContent;
 
     @Column(updatable = false)

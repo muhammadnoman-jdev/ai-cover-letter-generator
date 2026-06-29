@@ -65,4 +65,36 @@ public class CoverLetterService {
         CoverLetter coverLetter = getByIdForCurrentUser(id);
         coverLetterRepository.delete(coverLetter);
     }
+    
+    public CoverLetter update(Long id, CoverLetterRequestDTO dto) {
+        CoverLetter existing = getByIdForCurrentUser(id);
+
+        String generatedContent = aiService.generateCoverLetter(dto);
+
+        existing.setTitle(dto.getTitle());
+        existing.setJobTitle(dto.getJobTitle());
+        existing.setCompanyName(dto.getCompanyName());
+        existing.setSkills(dto.getSkills());
+        existing.setExperience(dto.getExperience());
+        existing.setJobDescription(dto.getJobDescription());
+        existing.setTone(dto.getTone());
+        existing.setGeneratedContent(generatedContent);
+
+        return coverLetterRepository.save(existing);
+    }
+    
+    public CoverLetter saveEditedContent(Long id, String editedContent) {
+        CoverLetter existing = getByIdForCurrentUser(id);
+        existing.setGeneratedContent(editedContent);
+        return coverLetterRepository.save(existing);
+    }
+    
+    public CoverLetter saveContactInfo(Long id, String name, String email, String phone, String linkedin) {
+        CoverLetter existing = getByIdForCurrentUser(id);
+        existing.setApplicantName(name);
+        existing.setApplicantEmail(email);
+        existing.setApplicantPhone(phone);
+        existing.setApplicantLinkedin(linkedin);
+        return coverLetterRepository.save(existing);
+    }
 }
