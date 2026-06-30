@@ -1,0 +1,347 @@
+/* ── Global Reset & Base ─────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.glass, .glass-strong, .glass-nav, .letter-card, .dashboard-card {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+}
+
+/* ── Glass Card ──────────────────────────────────── */
+.glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-strong {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Navbar ──────────────────────────────────────── */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.glass-nav .brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.glass-nav .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.glass-nav .nav-links a:hover {
+    color: #ffffff;
+}
+
+/* ── Buttons ─────────────────────────────────────── */
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(167, 139, 250, 0.3);
+}
+
+.btn-primary-glass {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary-glass:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
+}
+
+.btn-danger-glass {
+    background: linear-gradient(135deg, #f43f5e, #e11d48);
+    border: none;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-danger-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(244, 63, 94, 0.4);
+    color: #ffffff;
+}
+
+.btn-warning-glass {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border: none;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-warning-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+    color: #ffffff;
+}
+
+.btn-success-glass {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-success-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+    color: #ffffff;
+}
+
+/* ── Form Controls ───────────────────────────────── */
+.form-control-glass {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s !important;
+}
+
+.form-control-glass::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(167, 139, 250, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15) !important;
+    color: #ffffff !important;
+    outline: none !important;
+}
+
+select.form-control-glass option {
+    background: #302b63;
+    color: #ffffff;
+}
+
+/* ── Labels ──────────────────────────────────────── */
+.form-label-glass {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* ── Alerts ──────────────────────────────────────── */
+.alert-glass-danger {
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    border-radius: 12px;
+    color: #fda4af;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+.alert-glass-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    color: #6ee7b7;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+/* ── Page Title ──────────────────────────────────── */
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+/* ── Cover Letter Card in History ────────────────── */
+.letter-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.letter-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(167, 139, 250, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.letter-card .letter-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.letter-card .letter-meta {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+}
+
+/* ── Editable Content Area ───────────────────────── */
+.content-editor {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 16px !important;
+    color: #e2e8f0 !important;
+    font-family: 'Georgia', serif !important;
+    font-size: 14px !important;
+    line-height: 1.9 !important;
+    padding: 24px !important;
+    resize: vertical !important;
+    transition: all 0.3s !important;
+}
+
+.content-editor:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(167, 139, 250, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1) !important;
+    outline: none !important;
+}
+
+/* ── Dashboard Cards ─────────────────────────────── */
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+}
+
+.dashboard-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(167, 139, 250, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.dashboard-card .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.dashboard-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.dashboard-card .card-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.4);
+    border-radius: 3px;
+}

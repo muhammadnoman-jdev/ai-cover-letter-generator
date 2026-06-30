@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface CoverLetterRepository extends JpaRepository<CoverLetter, Long> {
     List<CoverLetter> findByUserOrderByCreatedAtDesc(User user);
     Optional<CoverLetter> findByIdAndUser(Long id, User user);
+    long countByUser(User user);
 }

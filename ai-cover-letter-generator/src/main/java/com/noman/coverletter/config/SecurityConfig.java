@@ -32,6 +32,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -51,7 +52,9 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/register", "/login", "/css/**", "/js/**").permitAll()
+            		.requestMatchers("/register", "/login", "/css/**", "/js/**",
+                            "/verify-email", "/forgot-password",
+                            "/reset-password").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

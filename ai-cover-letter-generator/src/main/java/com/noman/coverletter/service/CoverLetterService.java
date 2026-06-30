@@ -97,4 +97,15 @@ public class CoverLetterService {
         existing.setApplicantLinkedin(linkedin);
         return coverLetterRepository.save(existing);
     }
+    
+    public long getCountForCurrentUser() {
+        User user = getCurrentUser();
+        return coverLetterRepository.countByUser(user);
+    }
+
+    public CoverLetter getMostRecentForCurrentUser() {
+        User user = getCurrentUser();
+        List<CoverLetter> letters = coverLetterRepository.findByUserOrderByCreatedAtDesc(user);
+        return letters.isEmpty() ? null : letters.get(0);
+    }
 }

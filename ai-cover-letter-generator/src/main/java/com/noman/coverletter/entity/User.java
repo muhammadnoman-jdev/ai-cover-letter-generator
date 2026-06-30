@@ -29,8 +29,59 @@ public class User {
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
+    
+    @Column(nullable = false)
+    private boolean enabled = false;
 
-    @PrePersist
+    private String verificationToken;
+
+    private LocalDateTime verificationTokenExpiry;
+
+    private String passwordResetToken;
+
+    private LocalDateTime passwordResetTokenExpiry;
+
+    public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(String verificationToken) {
+		this.verificationToken = verificationToken;
+	}
+
+	public LocalDateTime getVerificationTokenExpiry() {
+		return verificationTokenExpiry;
+	}
+
+	public void setVerificationTokenExpiry(LocalDateTime verificationTokenExpiry) {
+		this.verificationTokenExpiry = verificationTokenExpiry;
+	}
+
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(String passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
+	}
+
+	public LocalDateTime getPasswordResetTokenExpiry() {
+		return passwordResetTokenExpiry;
+	}
+
+	public void setPasswordResetTokenExpiry(LocalDateTime passwordResetTokenExpiry) {
+		this.passwordResetTokenExpiry = passwordResetTokenExpiry;
+	}
+
+	@PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }

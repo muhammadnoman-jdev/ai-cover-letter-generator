@@ -1,19 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dashboard</title>
+    <title>Dashboard — Cover Letter AI</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
-<body class="bg-light">
-<div class="container mt-5" style="max-width: 600px">
-    <h3 class="mb-4">Welcome to Cover Letter Generator</h3>
-    <div class="d-grid gap-3">
-        <a th:href="@{/cover-letters/new}" class="btn btn-primary btn-lg">Generate New Cover Letter</a>
-        <a th:href="@{/cover-letters/history}" class="btn btn-outline-secondary btn-lg">View My History</a>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-danger btn-lg w-100">Logout</button>
+<body>
+
+<nav class="glass-nav">
+    <a href="/dashboard" class="brand">✨ Cover Letter AI</a>
+    <div class="nav-links">
+        <a th:href="@{/cover-letters/new}">Cover Letter</a>
+        <a th:href="@{/tools/resume-summary}">Resume Summary</a>
+        <a th:href="@{/tools/interview-questions}">Interview Prep</a>
+        <a th:href="@{/cover-letters/history}">History</a>
+        <a th:href="@{/profile}">Profile</a>
+        <form th:action="@{/logout}" method="post" style="display:inline">
+            <button type="submit" class="btn-danger-glass"
+                    style="padding:6px 18px; font-size:0.85rem">Logout</button>
         </form>
     </div>
+</nav>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="page-title" style="font-size:2.4rem">Your AI Writing Assistant</h1>
+        <p class="page-subtitle" style="font-size:1rem">
+            Generate professional cover letters, resume summaries, and interview questions in seconds
+        </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+    	<div class="col-md-4">
+		    <a th:href="@{/profile}" class="dashboard-card">
+		        <div class="card-icon">👤</div>
+		        <div class="card-title">My Profile</div>
+		        <div class="card-desc">View your account stats and update your details</div>
+		    </a>
+		</div>
+        <div class="col-md-4">
+            <a th:href="@{/cover-letters/new}" class="dashboard-card">
+                <div class="card-icon">✍️</div>
+                <div class="card-title">Cover Letter</div>
+                <div class="card-desc">Generate a tailored AI-powered cover letter for any job</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/tools/resume-summary}" class="dashboard-card">
+                <div class="card-icon">📄</div>
+                <div class="card-title">Resume Summary</div>
+                <div class="card-desc">Get a professional summary paragraph for your resume</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/tools/interview-questions}" class="dashboard-card">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Interview Prep</div>
+                <div class="card-desc">Generate technical interview questions for any role</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/cover-letters/history}" class="dashboard-card">
+                <div class="card-icon">📂</div>
+                <div class="card-title">My History</div>
+                <div class="card-desc">View, edit, and download your saved cover letters</div>
+            </a>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>

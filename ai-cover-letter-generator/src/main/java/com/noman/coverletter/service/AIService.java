@@ -66,36 +66,89 @@ public class AIService {
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
         try {
-            ResponseEntity<Map> response = restTemplate.postForEntity(apiUrl, request, Map.class);
-            
-            // DEBUG - print full response to console
-            System.out.println("=== OPENROUTER RESPONSE ===");
-            System.out.println(response.getBody());
-            System.out.println("===========================");
+            ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, request, String.class);
 
-            Map<String, Object> body = response.getBody();
-            
+            String body = response.getBody();
+
             if (body == null) {
                 return "Error: Empty response from AI service";
             }
 
-            // Check for error field in response
-            if (body.containsKey("error")) {
-                return "AI Error: " + body.get("error").toString();
+            // Parse manually using simple string extraction
+            // Find "content":"..." in the response
+            String contentKey = "\"content\":\"";
+            int startIndex = body.indexOf(contentKey);
+
+            if (startIndex == -1) {
+                return "Error: Could not find content in response: " + body.substring(0, Math.min(200, body.length()));
             }
 
-            List<Map> choices = (List<Map>) body.get("choices");
-            
-            if (choices == null || choices.isEmpty()) {
-                return "Error: No choices in response. Full response: " + body.toString();
+            startIndex += contentKey.length();
+
+            // Find the closing quote — accounting for escaped characters
+            StringBuilder result = new StringBuilder();
+            int i = startIndex;
+            while (i < body.length()) {
+                char c = body.charAt(i);
+                if (c == '\\' && i + 1 < body.length()) {
+                    char next = body.charAt(i + 1);
+                    if (next == '"') {
+                        result.append('"');
+                        i += 2;
+                    } else if (next == 'n') {
+                        result.append('\n');
+                        i += 2;
+                    } else if (next == 't') {
+                        result.append('\t');
+                        i += 2;
+                    } else if (next == '\\') {
+                        result.append('\\');
+                        i += 2;
+                    } else {
+                        result.append(c);
+                        i++;
+                    }
+                } else if (c == '"') {
+                    break;
+                } else {
+                    result.append(c);
+                    i++;
+                }
             }
-            
-            Map firstChoice = choices.get(0);
-            Map messageResponse = (Map) firstChoice.get("message");
-            return (String) messageResponse.get("content");
+
+            return result.toString().trim();
 
         } catch (Exception e) {
-            return "Failed to generate cover letter. Please try again. Error: " + e.getMessage();
+            return "Failed to generate. Please try again. Error: " + e.getMessage();
         }
+    }    
+    
+    public String generateResumeSummary(String name, String skills, String experience, String targetRole) {
+        String prompt = "Write a professional resume summary for the following candidate:\n\n" +
+                "Name: " + name + "\n" +
+                "Target Role: " + targetRole + "\n" +
+                "Skills: " + skills + "\n" +
+                "Experience: " + experience + "\n\n" +
+                "RULES:\n" +
+                "1. Write only the summary paragraph — 3 to 5 sentences maximum\n" +
+                "2. Start directly with the candidate's professional identity\n" +
+                "3. Highlight key skills and experience relevant to the target role\n" +
+                "4. End with what value they bring to an employer\n" +
+                "5. Do not include any labels, headings, or extra text";
+        return callOpenRouter(prompt);
     }
+    
+    public String generateInterviewQuestions(String jobTitle, String skills) {
+        String prompt = "Generate 10 technical interview questions for the following role:\n\n" +
+                "Job Title: " + jobTitle + "\n" +
+                "Skills Required: " + skills + "\n\n" +
+                "RULES:\n" +
+                "1. Write exactly 10 questions numbered 1 to 10\n" +
+                "2. Mix conceptual questions and practical scenario-based questions\n" +
+                "3. Focus on the skills listed\n" +
+                "4. After each question add a brief answer hint in brackets\n" +
+                "5. Do not add any intro or outro text";
+        return callOpenRouter(prompt);
+    }
+    
 }
